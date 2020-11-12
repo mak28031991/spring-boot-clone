@@ -20,7 +20,7 @@ public class Host {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HostID", updatable = false, nullable = false)
-    private Integer hostId;
+    private Long hostID;
 
     @Column(name = "BankName")
     private String bankName;

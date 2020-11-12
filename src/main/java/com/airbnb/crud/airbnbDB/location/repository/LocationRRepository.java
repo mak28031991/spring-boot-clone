@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @ReadOnlyRepository
-public interface LocationRRepository extends JpaRepository<Location, Integer> {
+public interface LocationRRepository extends JpaRepository<Location, Long> {
 }

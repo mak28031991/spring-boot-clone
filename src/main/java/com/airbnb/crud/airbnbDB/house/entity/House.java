@@ -17,7 +17,7 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HouseID", updatable = false, nullable = false)
-    private Integer id;
+    private Long houseID;
 
     @Column(name = "StreetNumber")
     private String streetNumber;

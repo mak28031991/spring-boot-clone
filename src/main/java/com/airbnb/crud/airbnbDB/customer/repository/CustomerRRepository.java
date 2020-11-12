@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @ReadOnlyRepository
-public interface CustomerRRepository extends JpaRepository<Customer, Integer> {
+public interface CustomerRRepository extends JpaRepository<Customer, Long> {
 }
