@@ -32,19 +32,17 @@ public class AirbnbSlaveConfig {
         super();
     }
 
-    @Bean("airbnbDataSlaveSource")
-    @Primary
+    @Bean("airbnbSlaveDataSource")
     @ConfigurationProperties(prefix = "spring.airbnb-slave-datasource")
-    public DataSource airbnbDataSlaveSource(){
+    public DataSource airbnbSlaveDataSource(){
         return DataSourceBuilder.create().build();
     }
 
-    @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean airbnbSlaveEntityManager(@Qualifier("airbnbDataSlaveSource") final DataSource airbnbDataSlaveSource){
+    public LocalContainerEntityManagerFactoryBean airbnbSlaveEntityManager(@Qualifier("airbnbSlaveDataSource") final DataSource airbnbSlaveDataSource){
         HibernateJpaVendorAdapter vendorAdapter =new HibernateJpaVendorAdapter();
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(airbnbDataSlaveSource);
+        em.setDataSource(airbnbSlaveDataSource);
         em.setPackagesToScan("com.airbnb.crud.airbnbDB");
         em.setJpaVendorAdapter(vendorAdapter);
         Map<String, String> properties = new HashMap<>();

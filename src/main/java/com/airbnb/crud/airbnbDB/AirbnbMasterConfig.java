@@ -42,10 +42,10 @@ public class AirbnbMasterConfig {
 
     @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean airbnbMasterEntityManager(@Qualifier("airbnbDataSource") final DataSource masterDataSource){
+    public LocalContainerEntityManagerFactoryBean airbnbMasterEntityManager(@Qualifier("airbnbDataSource") final DataSource airbnbDataSource){
         HibernateJpaVendorAdapter vendorAdapter =new HibernateJpaVendorAdapter();
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(masterDataSource);
+        em.setDataSource(airbnbDataSource);
         em.setPackagesToScan("com.airbnb.crud.airbnbDB");
         em.setJpaVendorAdapter(vendorAdapter);
         Map<String, String> properties = new HashMap<>();
@@ -55,6 +55,8 @@ public class AirbnbMasterConfig {
         return em;
     }
 
+    @Primary
+    @Bean
     public PlatformTransactionManager airbnbMasterTransactionManager(@Qualifier("airbnbMasterEntityManager") final LocalContainerEntityManagerFactoryBean airbnbMasterEntityManager){
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(airbnbMasterEntityManager.getObject());
