@@ -52,6 +52,7 @@ public class AirbnbSlaveConfig {
         return em;
     }
 
+    @Bean
     public PlatformTransactionManager airbnbSlaveTransactionManager(@Qualifier("airbnbSlaveEntityManager") final LocalContainerEntityManagerFactoryBean airbnbSlaveEntityManager){
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(airbnbSlaveEntityManager.getObject());

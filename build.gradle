@@ -1,12 +1,108 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7.1"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.4.0-SNAPSHOT'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
+    id "org.sonarqube" version "2.7.1"
 }
 
 group = 'com.airbnb'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.sonarqube'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.8.4"
+    reportsDir = file("${buildDir}/reports/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/reports/jacoco/jacocoHtml")
+        xml.destination file("${buildDir}/reports/jacoco/jacocoXml")
+    }
+    afterEvaluate {
+        getClassDirectories().setFrom(
+                classDirectories.files.collect {
+                    fileTree(dir: it, exclude: [
+                            '**/repository/**',
+                            '**/entity/**',
+                            '**/exceptions/**',
+                            'com/airbnb/crud/AirbnbApplication*',
+                    ])
+                }
+        )
+    }
+}
+
+test {
+    useJUnitPlatform()
+    ignoreFailures = false
+    jacoco {
+        destinationFile = file("${buildDir}/reports/jacoco/jacoco.exec")
+    }
+    testLogging {
+        exceptionFormat "full" // default is "short"
+        events "passed", "skipped", "failed"
+    }
+
+}
+test.finalizedBy(project.tasks.jacocoTestReport)
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+sonarqube {
+    properties {
+        property "sonar.language", "java"
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                minimum = 0.6
+            }
+        }
+        rule {
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.6
+            }
+        }
+    }
+    afterEvaluate {
+        getClassDirectories().setFrom(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/repository/**',
+                    '**/entity/**',
+                    '**/exceptions/**',
+                    'com/airbnb/crud/AirbnbApplication*',
+            ])
+        })
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
 
 configurations {
     compileOnly {
@@ -25,7 +121,7 @@ ext {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
     //database dependencies
     runtimeOnly 'mysql:mysql-connector-java'
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa"){
@@ -37,12 +133,26 @@ dependencies {
     compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '7.0.19'
     compile group: 'org.apache.tomcat', name: 'tomcat-juli', version: '7.0.19'
 
+    //swagger
+    compile("io.springfox:springfox-swagger2:2.9.2") {
+        exclude module: 'swagger-annotations'
+        exclude module: 'swagger-models'
+    }
+    compile("io.swagger:swagger-annotations:1.5.21")
+    compile("io.swagger:swagger-models:1.5.21")
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    //monitoring
     runtimeOnly 'io.micrometer:micrometer-registry-new-relic'
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-core'
 
-    annotationProcessor 'org.projectlombok:lombok'
+    //testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:mysql'
