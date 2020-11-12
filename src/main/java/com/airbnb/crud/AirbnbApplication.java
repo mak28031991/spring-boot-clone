@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AirbnbApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AirbnbApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AirbnbApplication.class, args);
+    }
 
 }
