@@ -2,6 +2,7 @@ package com.airbnb.crud.service.customer;
 
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
+import com.airbnb.crud.exceptions.EntityNotFoundException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -14,13 +15,13 @@ public interface ICustomerService {
      * @see CustomerDetails
      * @see CreateCustomerRequest
      */
-    void createCustomer(@NotNull @Valid CreateCustomerRequest request);
+    void createCustomer(@NotNull @Valid final CreateCustomerRequest request);
 
     /**
-     * This methd will fetch the customer details for a city.
-     * @param cityId Integer value of cityID
+     * This method will fetch the customer details for a city.
+     * @param cityName String value of cityName
      * @return List of CustomerDetails
      * @see CustomerDetails
      */
-    List<CustomerDetails> getCustomersForCity(@NotNull Integer cityId);
+    List<CustomerDetails> getCustomersForCity(@NotNull final String cityName) throws EntityNotFoundException;
 }

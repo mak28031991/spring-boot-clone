@@ -23,7 +23,7 @@ public class BookingController {
 
     public static final String createdSuccessFully = "Booking created successfully.";
 
-    private IBookingService bookingService;
+    private final IBookingService bookingService;
 
     @Autowired
     public BookingController(IBookingService bookingService) {

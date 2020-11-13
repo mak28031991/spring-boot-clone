@@ -2,6 +2,7 @@ package com.airbnb.crud.exceptions;
 
 import com.airbnb.crud.controller.model.BaseResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,8 +26,23 @@ public class GlobalExceptionHandler {
         exception.setMessage("There was an error in performing this operation.");
         return buildResponseEntity(exception);
     }
+
+    /**
+     * This reponse will be sent in case of a EntityNotFoundException exception.
+     * @param ex exception thrown by the service or controller
+     * @return response of type @BaseResponse
+     */
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected @ResponseBody BaseResponse entityNotFoundExceptionHandler(Exception ex) {
+        AirbnbException exception = new AirbnbException(HttpStatus.NOT_FOUND);
+        String debugMessage = getDebugMessageFromStackTrace(ex);
+        exception.setDebugMessage(debugMessage);
+        exception.setMessage(ex.getMessage());
+        return buildResponseEntity(exception);
+    }
+
     private BaseResponse buildResponseEntity(AirbnbException exception) {
-        return new BaseResponse(1, exception.getMessage(),null);
+        return new BaseResponse(exception.getStatus().value(), exception.getMessage(),exception);
     }
 
     private String getDebugMessageFromStackTrace(Exception ex) {
