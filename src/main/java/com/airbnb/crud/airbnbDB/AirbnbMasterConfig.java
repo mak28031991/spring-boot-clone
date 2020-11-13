@@ -49,8 +49,8 @@ public class AirbnbMasterConfig {
         em.setPackagesToScan("com.airbnb.crud.airbnbDB");
         em.setJpaVendorAdapter(vendorAdapter);
         Map<String, String> properties = new HashMap<>();
-        properties.put("hibernate.implicit_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
-        properties.put("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
+        //properties.put("hibernate.implicit_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
+        //properties.put("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
         em.setJpaPropertyMap(properties);
         return em;
     }

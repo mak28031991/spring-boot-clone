@@ -1,20 +1,19 @@
 package com.airbnb.crud.airbnbDB.house.entity;
 
 import com.airbnb.crud.airbnbDB.enums.Availability;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Builder
 @Table(name = "house")
+@NoArgsConstructor
+@AllArgsConstructor
 public class House {
 
     @Id
@@ -41,5 +40,6 @@ public class House {
     private Long hostID;
 
     @Column(name = "Availability")
+    @Enumerated(EnumType.STRING)
     private Availability availability;
 }

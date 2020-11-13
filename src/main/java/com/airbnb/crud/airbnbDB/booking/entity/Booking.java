@@ -1,35 +1,35 @@
 package com.airbnb.crud.airbnbDB.booking.entity;
 
 import com.airbnb.crud.airbnbDB.enums.BookingStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Builder
 @Table(name = "booking")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BookingID", updatable = false, nullable = false)
-    private Integer bookingId;
+    private Long bookingId;
 
     @Column(name = "BookingStartDate")
-    private String bookingStartDate;
+    private Long bookingStartDate;
 
     @Column(name = "BookingEndDate")
-    private String bookingEndDate;
+    private Long bookingEndDate;
 
     @Column(name = "BookingStatus")
+    @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
 
     @Column(name = "HouseID")
@@ -39,7 +39,7 @@ public class Booking {
     private Long customerId;
 
     @Column(name = "FinalCost")
-    private String finalCost;
+    private Double finalCost;
 
     @CreationTimestamp
     @Column(name = "Timestamp")

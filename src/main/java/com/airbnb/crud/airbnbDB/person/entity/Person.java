@@ -1,54 +1,51 @@
 package com.airbnb.crud.airbnbDB.person.entity;
 
-import com.airbnb.crud.airbnbDB.enums.AccountStatus;
 import com.airbnb.crud.airbnbDB.enums.PersonGender;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PersonID", updatable = false, nullable = false)
-    private Long personID;
+    protected Long personID;
 
     @Column(name = "FirstName")
-    private String firstName;
+    protected String firstName;
 
     @Column(name = "LastName")
-    private String lastName;
+    protected String lastName;
 
     @Column(name = "EmailID")
-    private String emailID;
+    protected String emailID;
 
     @Column(name = "Password")
-    private String password;
+    protected String password;
 
     @Column(name = "Photo")
-    private String photo;
+    protected String photo;
 
     @Column(name = "BirthDate")
-    private String birthDate;
+    protected String birthDate;
 
     @Column(name = "PhoneNumber")
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @Column(name = "Gender")
-    private PersonGender gender;
+    @Enumerated(EnumType.STRING)
+    protected PersonGender gender;
 
     @Column(name = "AccountStatus")
-    private AccountStatus accountStatus;
+    protected String accountStatus;
 }

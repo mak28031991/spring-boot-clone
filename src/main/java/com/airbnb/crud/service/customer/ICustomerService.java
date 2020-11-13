@@ -1,6 +1,7 @@
 package com.airbnb.crud.service.customer;
 
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
+import com.airbnb.crud.controller.customer.model.CustomerAttributes;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
 import com.airbnb.crud.exceptions.EntityNotFoundException;
 
@@ -12,7 +13,7 @@ public interface ICustomerService {
     /**
      * This method will create a customer.
      * @param request instance of CreateCustomerRequest
-     * @see CustomerDetails
+     * @see CustomerAttributes
      * @see CreateCustomerRequest
      */
     void createCustomer(@NotNull @Valid final CreateCustomerRequest request);
