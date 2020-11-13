@@ -31,4 +31,5 @@ public class Location {
 
     @Column(name = "Zipcode")
     private String zipCode;
+
 }
