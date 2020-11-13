@@ -14,22 +14,22 @@ import java.util.List;
 @Component
 public class CustomerDaoImpl implements ICustomerDao {
 
-    private CustomerRWRepository customerRWRepository;
-    private CustomerRRepository customerRRepository;
+    private final CustomerRWRepository customerRWRepository;
+    private final CustomerRRepository customerRRepository;
 
     @Autowired
-    public CustomerDaoImpl(CustomerRWRepository customerRWRepository, CustomerRRepository customerRRepository) {
+    public CustomerDaoImpl(final CustomerRWRepository customerRWRepository, final CustomerRRepository customerRRepository) {
         this.customerRWRepository = customerRWRepository;
         this.customerRRepository = customerRRepository;
     }
 
     @Override
-    public void createCustomer(@NotNull Customer customer) {
+    public void createCustomer(@NotNull final Customer customer) {
         customerRWRepository.save(customer);
     }
 
     @Override
-    public List<Customer> getCustomersForCity(@NotEmpty String cityName) {
+    public List<Customer> getCustomersForCity(@NotEmpty final String cityName) {
         return customerRRepository.findCustomersByCityName(cityName);
     }
 

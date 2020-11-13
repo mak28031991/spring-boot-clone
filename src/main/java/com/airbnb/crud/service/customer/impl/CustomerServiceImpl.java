@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements ICustomerService {
     private final ICustomerDao customerDao;
 
     @Autowired
-    public CustomerServiceImpl(ICustomerDao customerDao) {
+    public CustomerServiceImpl(final ICustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements ICustomerService {
         return customers.stream().map(this::createCustomerDetails).collect(Collectors.toList());
     }
 
-    private CustomerDetails createCustomerDetails(Customer customer) {
+    private CustomerDetails createCustomerDetails(final Customer customer) {
         return CustomerDetails.builder()
                 .customerId(customer.getPersonID())
                 .accountStatus(customer.getAccountStatus())
