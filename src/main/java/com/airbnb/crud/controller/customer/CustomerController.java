@@ -3,6 +3,7 @@ package com.airbnb.crud.controller.customer;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
 import com.airbnb.crud.controller.model.BaseResponse;
+import com.airbnb.crud.exceptions.EntityNotFoundException;
 import com.airbnb.crud.service.customer.ICustomerService;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.ApiOperation;
@@ -45,12 +46,12 @@ public class CustomerController {
                 .build();
     }
 
-    @RequestMapping(value = "/city/{city_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/city/{city_name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "This api will be used to get all the customer for a city")
     @Timed(value="get_customer_for_city", histogram = true)
-    public BaseResponse getCustomersForCity(@PathVariable("city_id")Integer cityId){
-        log.info("fetching customers for cityId ={}",cityId);
-        List<CustomerDetails> customers = customerService.getCustomersForCity(cityId);
+    public BaseResponse getCustomersForCity(@PathVariable("city_name")String cityName) throws EntityNotFoundException {
+        log.info("fetching customers for cityName ={}",cityName);
+        List<CustomerDetails> customers = customerService.getCustomersForCity(cityName);
         return BaseResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(customerFetchedSuccessFully)
