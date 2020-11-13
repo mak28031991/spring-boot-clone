@@ -19,7 +19,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CustomerID", updatable = false, nullable = false)
-    private Integer customerID;
+    private Long customerID;
 
     @Column(name = "CardNumber")
     private String cardNumber;
