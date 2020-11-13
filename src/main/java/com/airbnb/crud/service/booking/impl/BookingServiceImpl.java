@@ -26,7 +26,18 @@ public class BookingServiceImpl implements IBookingService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void createBooking(@NotNull @Valid final CreateBookingRequest request) {
         //creating booking entry
-        @NotNull Booking booking = Booking.builder().build();
+        @NotNull Booking booking = getBookingFromRequest(request);
         bookingDao.createBooking(booking);
+    }
+
+    private Booking getBookingFromRequest(CreateBookingRequest request) {
+        return Booking.builder()
+                .bookingEndDate(request.getBookingEndEpoch())
+                .bookingStartDate(request.getBookingStartEpoch())
+                .bookingStatus(request.getBookingStatus())
+                .customerId(request.getCustomerId())
+                .finalCost(request.getFinalCost())
+                .houseId(request.getHouseId())
+                .build();
     }
 }

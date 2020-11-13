@@ -2,11 +2,11 @@ package com.airbnb.crud.exceptions;
 
 import com.airbnb.crud.controller.model.BaseResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     }
 
     private BaseResponse buildResponseEntity(AirbnbException exception) {
-        return new BaseResponse(exception.getStatus().value(), exception.getMessage(),exception);
+        return new BaseResponse(exception.getStatus().value(), exception.getMessage(), exception.getDebugMessage());
     }
 
     private String getDebugMessageFromStackTrace(Exception ex) {
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
             return msg + " at " + ex.getStackTrace()[0].getLineNumber()
                     + " in method " + ex.getStackTrace()[0].getMethodName()
                     + " in class " + ex.getStackTrace()[0].getClassName()
-                    + "with rootCause " + rootCause;
+                    + " with rootCause " + rootCause;
         }
         return null;
     }

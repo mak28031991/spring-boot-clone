@@ -1,5 +1,6 @@
 package com.airbnb.crud.controller.booking.model;
 
+import com.airbnb.crud.airbnbDB.enums.BookingStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,8 +22,9 @@ import javax.validation.constraints.NotNull;
 public class CreateBookingRequest {
     @NotNull @JsonProperty("booking_start_epoch") private Long bookingStartEpoch;
     @NotNull @JsonProperty("booking_end_epoch") private Long bookingEndEpoch;
-    @NotNull @JsonProperty("booking_status") private String bookingStatus;
+    @NotNull @JsonProperty("booking_status") private BookingStatus bookingStatus;
     @NotNull @JsonProperty("final_cost") private Double finalCost;
     @NotNull @JsonProperty("created_at_epoch") private Long createdAtEpoch;
     @NotNull @JsonProperty("customer_id") private Long customerId;
+    @NotNull @JsonProperty("house_id") private Long houseId;
 }

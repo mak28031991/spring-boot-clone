@@ -1,5 +1,10 @@
 package com.airbnb.crud.airbnbDB.enums;
 
 public enum PaymentType {
-    card,net_banking
+    CreditCard("CREDIT CARD"),DebitCard("DEBIT CARD");
+
+    String paymentType;
+    PaymentType(String s) {
+        this.paymentType = s;
+    }
 }

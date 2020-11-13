@@ -1,7 +1,6 @@
 package com.airbnb.crud.controller.booking;
 
 import com.airbnb.crud.controller.booking.model.CreateBookingRequest;
-import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.model.BaseResponse;
 import com.airbnb.crud.service.booking.IBookingService;
 import io.micrometer.core.annotation.Timed;
