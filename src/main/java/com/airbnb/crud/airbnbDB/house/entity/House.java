@@ -1,12 +1,15 @@
 package com.airbnb.crud.airbnbDB.house.entity;
 
-import com.airbnb.crud.airbnbDB.location.entity.Location;
 import com.airbnb.crud.airbnbDB.enums.Availability;
-import com.airbnb.crud.airbnbDB.host.entity.Host;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
@@ -31,13 +34,11 @@ public class House {
     @Column(name = "CostPerNight")
     private String costPerNight;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "LocationID")
-    private Location location;
+    @Column(name = "LocationID")
+    private Long locationId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "HostID")
-    private Host hostID;
+    @Column(name = "HostID")
+    private Long hostID;
 
     @Column(name = "Availability")
     private Availability availability;

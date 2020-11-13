@@ -1,26 +1,23 @@
 package com.airbnb.crud.airbnbDB.host.entity;
 
 import com.airbnb.crud.airbnbDB.enums.AccountType;
+import com.airbnb.crud.airbnbDB.person.entity.Person;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Builder
 @Table(name = "host")
-public class Host {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HostID", updatable = false, nullable = false)
-    private Long hostID;
+@PrimaryKeyJoinColumn(name = "HostID")
+public class Host extends Person {
 
     @Column(name = "BankName")
     private String bankName;

@@ -1,13 +1,16 @@
 package com.airbnb.crud.airbnbDB.booking.entity;
 
-import com.airbnb.crud.airbnbDB.customer.entity.Customer;
-import com.airbnb.crud.airbnbDB.house.entity.House;
 import com.airbnb.crud.airbnbDB.enums.BookingStatus;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,11 +32,11 @@ public class Booking {
     @Column(name = "BookingStatus")
     private BookingStatus bookingStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name ="HouseID")
-    private House house;
+    @Column(name = "HouseID")
+    private Long houseId;
 
-    @ManyToOne(fetch = FetchType.LAZY)  @JoinColumn(name ="CustomerID")
-    private Customer customer;
+    @Column(name = "CustomerID")
+    private Long customerId;
 
     @Column(name = "FinalCost")
     private String finalCost;
