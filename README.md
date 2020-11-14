@@ -24,7 +24,7 @@ This project takes care of below items.
 ## How to set up?
 * Set up Database
     * Install mysql
-    * Create new database schema named `airbnb`
+    * Create new database schema named `mydb`
     * Copy the schema from `resources/schema.sql` and import the schema into `mydb` database. This will seed the database.
 * Set up application
     * Provide the username, password and database url of the database in `resources/application.properties`.
