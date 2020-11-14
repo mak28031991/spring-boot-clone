@@ -7,10 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -18,7 +15,7 @@ import javax.persistence.Table;
 @Data
 @SuperBuilder
 @Table(name = "customer")
-@PrimaryKeyJoinColumn(name = "CustomerID")
+@PrimaryKeyJoinColumn(name = "customer_id")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer extends Person {
@@ -32,7 +29,6 @@ public class Customer extends Person {
     @Column(name = "NameOnCard")
     private String nameOnCard;
 
-    @Column(name = "PaymentType")
-    //@Enumerated(EnumType.STRING) @TODO change this to enum
+    @Column(name = "PaymentType", length=45)
     private String paymentType;
 }

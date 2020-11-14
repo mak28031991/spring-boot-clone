@@ -16,8 +16,8 @@ import javax.persistence.*;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "LocationID", updatable = false, nullable = false)
-    private Long locationID;
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = "Country")
     private String country;

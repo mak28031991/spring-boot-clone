@@ -1,5 +1,6 @@
 package com.airbnb.crud.controller.customer.model;
 
+import com.airbnb.crud.airbnbDB.enums.AccountStatus;
 import com.airbnb.crud.airbnbDB.enums.PersonGender;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @SuperBuilder
@@ -26,11 +28,11 @@ public class CustomerAttributes {
     @JsonProperty("password") @NotEmpty private String password;
     @JsonProperty("photo") @NotEmpty private String photo;
     @JsonProperty("birth_date") @NotEmpty private String birthDate;
-    @JsonProperty("gender") @NotEmpty private PersonGender gender;
-    @JsonProperty("account_status") @NotEmpty private String accountStatus;
+    @JsonProperty("gender") @NotNull private PersonGender gender;
+    @JsonProperty("account_status")  @NotNull private AccountStatus accountStatus;
     @JsonProperty("card_number") @NotEmpty private String cardNumber;
     @JsonProperty("security_code") @NotEmpty private String securityCode;
     @JsonProperty("name_on_card") @NotEmpty private String nameOnCard;
-    @JsonProperty("payment_type") @NotEmpty private String paymentType; //@TODO change this to enum
+    @JsonProperty("payment_type") @NotEmpty private String paymentType;
     @JsonProperty("phone_number") @NotEmpty private String phoneNumber;
 }

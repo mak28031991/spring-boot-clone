@@ -25,15 +25,15 @@ This project takes care of below items.
 * Set up Database
     * Install mysql
     * Create new database schema named `airbnb`
-    * Copy the schema from `resources/db/schema.sql` and import the schema into `airbnb` database. This will seed the database.
+    * Copy the schema from `resources/schema.sql` and import the schema into `mydb` database. This will seed the database.
 * Set up application
     * Provide the username, password and database url of the database in `resources/application.properties`.
     * Currently, we are using same database as master and slave.    
     ```properties
-    spring.airbnb-master-datasource.url=${AIRBNB_MASTER_DB_HOST_URL:jdbc:mysql://localhost:3306/airbnb}
+    spring.airbnb-master-datasource.url=${AIRBNB_MASTER_DB_HOST_URL:jdbc:mysql://localhost:3306/mydb}
     spring.airbnb-master-datasource.username=${AIRBNB_MASTER_DB_USERNAME:root}
     spring.airbnb-master-datasource.password=${AIRBNB_MASTER_DB_PASSWORD:root}
-    spring.airbnb-slave-datasource.url=${AIRBNB_SLAVE_DB_HOST_URL:jdbc:mysql://localhost:3306/airbnb}
+    spring.airbnb-slave-datasource.url=${AIRBNB_SLAVE_DB_HOST_URL:jdbc:mysql://localhost:3306/mydb}
     spring.airbnb-slave-datasource.username=${AIRBNB_SLAVE_DB_USERNAME:root}
     spring.airbnb-slave-datasource.password=${AIRBNB_SLAVE_DB_PASSWORD:root}
     ```
@@ -73,8 +73,7 @@ Once application is in running state,
 *   Sample tests report looks like below
 ![Tests Summary](documentation/testSummary.png)
 *   Sample code coverage report looks like below
-![Code Coverage](documentation/codeCoverage.png) 
- 
+![Code Coverage](documentation/codeCoverage.png)  
 
 ### Monitoring
 *   We are using actuator and prometheus to emit the metrics of the service like resource usages, API latency, API throughput etc. 

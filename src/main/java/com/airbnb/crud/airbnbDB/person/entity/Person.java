@@ -1,5 +1,6 @@
 package com.airbnb.crud.airbnbDB.person.entity;
 
+import com.airbnb.crud.airbnbDB.enums.AccountStatus;
 import com.airbnb.crud.airbnbDB.enums.PersonGender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,8 @@ import javax.persistence.*;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PersonID", updatable = false, nullable = false)
-    protected Long personID;
+    @Column(name = "id", updatable = false, nullable = false)
+    protected Long id;
 
     @Column(name = "FirstName")
     protected String firstName;
@@ -47,5 +48,6 @@ public class Person {
     protected PersonGender gender;
 
     @Column(name = "AccountStatus")
-    protected String accountStatus;
+    @Enumerated(EnumType.STRING)
+    protected AccountStatus accountStatus;
 }

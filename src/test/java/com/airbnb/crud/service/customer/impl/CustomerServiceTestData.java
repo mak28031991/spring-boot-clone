@@ -2,7 +2,6 @@ package com.airbnb.crud.service.customer.impl;
 
 import com.airbnb.crud.airbnbDB.customer.entity.Customer;
 import com.airbnb.crud.airbnbDB.enums.AccountStatus;
-import com.airbnb.crud.airbnbDB.enums.PaymentType;
 import com.airbnb.crud.airbnbDB.enums.PersonGender;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
@@ -16,7 +15,7 @@ public class CustomerServiceTestData {
     public static CreateCustomerRequest getHappyCreateCustomerRequest() {
         return CreateCustomerRequest.builder()
                 .cardNumber("123ABC456")
-                .accountStatus(AccountStatus.deactivated.name())
+                .accountStatus(AccountStatus.ACTIVE)
                 .birthDate(String.valueOf(new Date().getTime()))
                 .emailID("test@gmail.com")
                 .firstName("test")
@@ -24,7 +23,7 @@ public class CustomerServiceTestData {
                 .lastName("test")
                 .nameOnCard("test test")
                 .password("password")
-                .paymentType(PaymentType.CreditCard.name())
+                .paymentType("CREDIT CARD")
                 .phoneNumber("9898989898")
                 .photo("some_photo_url")
                 .securityCode("!@#$%^&*()")
@@ -51,12 +50,12 @@ public class CustomerServiceTestData {
 
     public static List<Customer> getHappyCustomersForCity() {
         return ImmutableList.of(
-                Customer.builder().personID(123L).build(),
-                Customer.builder().personID(456L).build()
+                Customer.builder().id(123L).build(),
+                Customer.builder().id(456L).build()
         );
     }
 
     public static List<CustomerDetails> getExpectedCustomersForHappyCityName(List<Customer> dummyCustomers) {
-        return dummyCustomers.stream().map( c -> CustomerDetails.builder().customerId(c.getPersonID()).build()).collect(Collectors.toList());
+        return dummyCustomers.stream().map( c -> CustomerDetails.builder().customerId(c.getId()).build()).collect(Collectors.toList());
     }
 }

@@ -40,7 +40,7 @@ public class BookingController {
         return BaseResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(createdSuccessFully)
-                .data(null)
+                .data(booking)
                 .build();
     }
 }

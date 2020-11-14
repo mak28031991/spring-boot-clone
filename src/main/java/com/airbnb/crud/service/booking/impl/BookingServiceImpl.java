@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Service
 public class BookingServiceImpl implements IBookingService {

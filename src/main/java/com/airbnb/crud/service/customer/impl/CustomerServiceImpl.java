@@ -61,7 +61,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     private CustomerDetails createCustomerDetails(final Customer customer) {
         return CustomerDetails.builder()
-                .customerId(customer.getPersonID())
+                .customerId(customer.getId())
                 .accountStatus(customer.getAccountStatus())
                 .birthDate(customer.getBirthDate())
                 .emailID(customer.getEmailID())

@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Data
 @SuperBuilder
 @Table(name = "host")
-@PrimaryKeyJoinColumn(name = "HostID")
+@PrimaryKeyJoinColumn(name = "host_id")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Host extends Person {

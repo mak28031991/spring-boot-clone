@@ -44,7 +44,7 @@ public class CustomerController {
         return BaseResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(savedSuccessFully)
-                .data(null)
+                .data(customer)
                 .build();
     }
 
