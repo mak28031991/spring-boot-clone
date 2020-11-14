@@ -1,0 +1,36 @@
+{
+  "status_code": 200,
+  "status_message": "Customer fetched successfully.",
+  "data": [
+    {
+      "first_name": "Sanika",
+      "last_name": "Bhagat",
+      "email": "sanika.s.bhagat@gmail.com",
+      "password": "a384b6463fc216a5f8ecb6670f86456a",
+      "photo": "some url",
+      "birth_date": "1993-12-08",
+      "gender": "MALE",
+      "account_status": "ACTIVE",
+      "security_code": "234",
+      "name_on_card": "Sanika Bhagat",
+      "payment_type": "CREDIT CARD",
+      "phone_number": "8578004072",
+      "customer_id": 1
+    },
+    {
+      "first_name": "Himanshu",
+      "last_name": "Bhagat",
+      "email": "himanshu.s.bhagat@gmail.com",
+      "password": "ba6cfb78f61e303e7ee3ff5ff9d3059d",
+      "photo": "some url",
+      "birth_date": "1989-05-12",
+      "gender": "MALE",
+      "account_status": "ACTIVE",
+      "security_code": "236",
+      "name_on_card": "Himanshu Bhagat",
+      "payment_type": "DEBIT CARD",
+      "phone_number": "8572688090",
+      "customer_id": 4
+    }
+  ]
+}

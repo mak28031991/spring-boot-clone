@@ -24,8 +24,8 @@ public class CustomerDaoImpl implements ICustomerDao {
     }
 
     @Override
-    public void createCustomer(@NotNull final Customer customer) {
-        customerRWRepository.save(customer);
+    public Customer createCustomer(@NotNull final Customer customer) {
+        return customerRWRepository.save(customer);
     }
 
     @Override

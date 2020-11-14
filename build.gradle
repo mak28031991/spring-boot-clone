@@ -121,7 +121,7 @@ repositories {
 }
 
 ext {
-    set('testcontainersVersion', "1.14.3")
+    set('testcontainersVersion', "1.15.0-rc2")
 }
 
 dependencies {
@@ -162,8 +162,9 @@ dependencies {
 
     //testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:mysql'
+    testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.15.0-rc2'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
+
 
     //utilities
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'

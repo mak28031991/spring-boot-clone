@@ -11,7 +11,7 @@ public interface ICustomerDao {
      * This method creates a customer and save the entries in database.
      * @param customer instance of customer
      */
-    void createCustomer(@NotNull Customer customer);
+    Customer createCustomer(@NotNull Customer customer);
 
     /**
      * This method fetches the list of customer based on cityName

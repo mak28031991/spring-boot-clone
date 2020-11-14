@@ -22,7 +22,7 @@ public class BookingDaoImpl implements IBookingDao{
     }
 
     @Override
-    public void createBooking(@NotNull Booking booking) {
-        bookingRWRepository.save(booking);
+    public Booking createBooking(@NotNull Booking booking) {
+        return bookingRWRepository.save(booking);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Service
 public class BookingServiceImpl implements IBookingService {
@@ -24,10 +25,10 @@ public class BookingServiceImpl implements IBookingService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void createBooking(@NotNull @Valid final CreateBookingRequest request) {
+    public Booking createBooking(@NotNull @Valid final CreateBookingRequest request) {
         //creating booking entry
         @NotNull Booking booking = getBookingFromRequest(request);
-        bookingDao.createBooking(booking);
+        return bookingDao.createBooking(booking);
     }
 
     private Booking getBookingFromRequest(CreateBookingRequest request) {

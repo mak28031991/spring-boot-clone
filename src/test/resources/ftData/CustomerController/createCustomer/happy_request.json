@@ -1,0 +1,15 @@
+{
+  "account_status": "ACTIVE",
+  "birth_date": "1991-04-04",
+  "card_number": "1231-1233-2133-1231",
+  "email": "faker@email.com",
+  "first_name": "lorem",
+  "gender": "MALE",
+  "last_name": "ipsum",
+  "name_on_card": "lorem ipsum",
+  "password": "random-password",
+  "payment_type": "CREDIT CARD",
+  "phone_number": "1234567654",
+  "photo": "http://some-url.images.google.com",
+  "security_code": "345"
+}

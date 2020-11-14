@@ -1,5 +1,6 @@
 package com.airbnb.crud.service.customer;
 
+import com.airbnb.crud.airbnbDB.customer.entity.Customer;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerAttributes;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
@@ -16,7 +17,7 @@ public interface ICustomerService {
      * @see CustomerAttributes
      * @see CreateCustomerRequest
      */
-    void createCustomer(@NotNull @Valid final CreateCustomerRequest request);
+    Customer createCustomer(@NotNull @Valid final CreateCustomerRequest request);
 
     /**
      * This method will fetch the customer details for a city.

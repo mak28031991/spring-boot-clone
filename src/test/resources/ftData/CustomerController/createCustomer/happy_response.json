@@ -1,0 +1,20 @@
+{
+  "status_code": 200,
+  "status_message": "Customer saved successfully.",
+  "data": {
+    "personID": 1,
+    "firstName": "lorem",
+    "lastName": "ipsum",
+    "emailID": "faker@email.com",
+    "password": "random-password",
+    "photo": "http://some-url.images.google.com",
+    "birthDate": "1991-04-04",
+    "phoneNumber": "1234567654",
+    "gender": "MALE",
+    "accountStatus": "ACTIVE",
+    "cardNumber": "1231-1233-2133-1231",
+    "securityCode": "345",
+    "nameOnCard": "lorem ipsum",
+    "paymentType": "CREDIT CARD"
+  }
+}

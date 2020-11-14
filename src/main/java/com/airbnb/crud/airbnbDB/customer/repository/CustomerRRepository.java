@@ -14,9 +14,9 @@ import java.util.List;
 public interface CustomerRRepository extends JpaRepository<Customer, Long> {
     @Query("select distinct customer " +
             "FROM Location l " +
-            "JOIN House h ON (l.locationID = h.locationId) " +
-            "JOIN Booking b ON (b.houseId = h.houseID) " +
-            "JOIN Customer customer ON (b.customerId = customer.personID) " +
+            "JOIN House h ON (l.id = h.locationId) " +
+            "JOIN Booking b ON (b.houseId = h.id) " +
+            "JOIN Customer customer ON (b.customerId = customer.id) " +
             "where l.city=:city_name")
     List<Customer> findCustomersByCityName(@Param("city_name") String cityName);
 

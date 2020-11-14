@@ -1,5 +1,6 @@
 package com.airbnb.crud.controller.booking;
 
+import com.airbnb.crud.airbnbDB.booking.entity.Booking;
 import com.airbnb.crud.controller.booking.model.CreateBookingRequest;
 import com.airbnb.crud.controller.model.BaseResponse;
 import com.airbnb.crud.service.booking.IBookingService;
@@ -34,11 +35,12 @@ public class BookingController {
     @Timed(value="create_booking", histogram = true)
     public BaseResponse createBooking(@Valid @NotNull @RequestBody CreateBookingRequest request){
         log.info("create booking request ={}",request);
-        bookingService.createBooking(request);
+        Booking booking = bookingService.createBooking(request);
+        log.debug("created booking={}",booking);
         return BaseResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(createdSuccessFully)
-                .data(null)
+                .data(booking)
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.airbnb.crud.service.booking;
 
+import com.airbnb.crud.airbnbDB.booking.entity.Booking;
 import com.airbnb.crud.controller.booking.model.CreateBookingRequest;
 
 import javax.validation.Valid;
@@ -11,5 +12,5 @@ public interface IBookingService {
      * @param request instance of CreateBookingRequest
      * @see CreateBookingRequest
      */
-    void createBooking(@NotNull @Valid final CreateBookingRequest request);
+    Booking createBooking(@NotNull @Valid final CreateBookingRequest request);
 }
