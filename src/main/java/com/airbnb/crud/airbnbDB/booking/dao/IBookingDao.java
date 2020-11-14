@@ -10,5 +10,5 @@ public interface IBookingDao {
      * @param booking instance of booking
      * @see Booking
      */
-    void createBooking(@NotNull Booking booking);
+    Booking createBooking(@NotNull Booking booking);
 }

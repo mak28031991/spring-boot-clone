@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     @Transactional
-    public void createCustomer(@NotNull @Valid final CreateCustomerRequest request) {
+    public Customer createCustomer(@NotNull @Valid final CreateCustomerRequest request) {
         @NotNull Customer customer = Customer.builder()
                 .cardNumber(request.getCardNumber())
                 .accountStatus(request.getAccountStatus())
@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements ICustomerService {
                 .photo(request.getPhoto())
                 .securityCode(request.getSecurityCode())
                 .build();
-        customerDao.createCustomer(customer);
+        return customerDao.createCustomer(customer);
     }
 
     @Override

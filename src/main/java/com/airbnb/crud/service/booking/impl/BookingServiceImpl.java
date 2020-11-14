@@ -24,10 +24,10 @@ public class BookingServiceImpl implements IBookingService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void createBooking(@NotNull @Valid final CreateBookingRequest request) {
+    public Booking createBooking(@NotNull @Valid final CreateBookingRequest request) {
         //creating booking entry
         @NotNull Booking booking = getBookingFromRequest(request);
-        bookingDao.createBooking(booking);
+        return bookingDao.createBooking(booking);
     }
 
     private Booking getBookingFromRequest(CreateBookingRequest request) {

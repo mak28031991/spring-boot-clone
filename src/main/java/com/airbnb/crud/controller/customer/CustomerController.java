@@ -1,5 +1,6 @@
 package com.airbnb.crud.controller.customer;
 
+import com.airbnb.crud.airbnbDB.customer.entity.Customer;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
 import com.airbnb.crud.controller.model.BaseResponse;
@@ -38,7 +39,8 @@ public class CustomerController {
     @Timed(value="create_customer", histogram = true)
     public BaseResponse createCustomer(@Valid @NotNull @RequestBody CreateCustomerRequest request){
         log.info("create customer request ={}",request);
-        customerService.createCustomer(request);
+        Customer customer = customerService.createCustomer(request);
+        log.debug("created customer={}",customer);
         return BaseResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(savedSuccessFully)
