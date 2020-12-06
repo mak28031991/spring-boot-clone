@@ -1,0 +1,70 @@
+{
+  "status_code": 200,
+  "status_message": "Sent panel data Successfully.",
+  "data": {
+    "headers": [
+      {
+        "name": "ID",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "Booking StartDate",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "Booking EndDate",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "Booking Status",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "House ID",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "Customer ID",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "Final Cost",
+        "component_type": "DATA",
+        "is_visible": "true"
+      },
+      {
+        "name": "Time Stamp",
+        "component_type": "DATA",
+        "is_visible": "true"
+      }
+    ],
+    "data": [
+      [
+        6,
+        36552587167,
+        36552587167,
+        "CANCELLED",
+        5,
+        4,
+        120,
+        "2017-12-11T21:25:11.000+00:00"
+      ],
+      [
+        7,
+        36552587167,
+        36552587167,
+        "CANCELLED",
+        5,
+        4,
+        120,
+        "2017-12-11T21:25:11.000+00:00"
+      ]
+    ]
+  }
+}
