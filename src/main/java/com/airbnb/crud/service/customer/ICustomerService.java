@@ -4,6 +4,7 @@ import com.airbnb.crud.airbnbDB.customer.entity.Customer;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerAttributes;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
+import com.airbnb.crud.exceptions.AirbnbException;
 import com.airbnb.crud.exceptions.EntityNotFoundException;
 
 import javax.validation.Valid;
@@ -17,7 +18,7 @@ public interface ICustomerService {
      * @see CustomerAttributes
      * @see CreateCustomerRequest
      */
-    Customer createCustomer(@NotNull @Valid final CreateCustomerRequest request);
+    Customer createCustomer(@NotNull @Valid final CreateCustomerRequest request) throws AirbnbException;
 
     /**
      * This method will fetch the customer details for a city.

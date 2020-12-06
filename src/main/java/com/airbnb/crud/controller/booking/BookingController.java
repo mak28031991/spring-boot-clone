@@ -3,6 +3,7 @@ package com.airbnb.crud.controller.booking;
 import com.airbnb.crud.airbnbDB.booking.entity.Booking;
 import com.airbnb.crud.controller.booking.model.CreateBookingRequest;
 import com.airbnb.crud.controller.model.BaseResponse;
+import com.airbnb.crud.exceptions.AirbnbException;
 import com.airbnb.crud.service.booking.IBookingService;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +34,7 @@ public class BookingController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "This api will be used to create the booking")
     @Timed(value="create_booking", histogram = true)
-    public BaseResponse createBooking(@Valid @NotNull @RequestBody CreateBookingRequest request){
+    public BaseResponse createBooking(@Valid @NotNull @RequestBody CreateBookingRequest request) throws AirbnbException {
         log.info("create booking request ={}",request);
         Booking booking = bookingService.createBooking(request);
         log.debug("created booking={}",booking);

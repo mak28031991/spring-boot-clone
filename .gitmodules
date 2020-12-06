@@ -1,0 +1,3 @@
+[submodule "authy"]
+	path = authy
+	url = https://github.com/mak28031991/authy
