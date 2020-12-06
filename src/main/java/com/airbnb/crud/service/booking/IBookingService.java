@@ -2,6 +2,7 @@ package com.airbnb.crud.service.booking;
 
 import com.airbnb.crud.airbnbDB.booking.entity.Booking;
 import com.airbnb.crud.controller.booking.model.CreateBookingRequest;
+import com.airbnb.crud.exceptions.AirbnbException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -12,5 +13,5 @@ public interface IBookingService {
      * @param request instance of CreateBookingRequest
      * @see CreateBookingRequest
      */
-    Booking createBooking(@NotNull @Valid final CreateBookingRequest request);
+    Booking createBooking(@NotNull @Valid final CreateBookingRequest request) throws AirbnbException;
 }

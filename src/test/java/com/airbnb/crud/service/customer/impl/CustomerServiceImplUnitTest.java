@@ -1,9 +1,12 @@
 package com.airbnb.crud.service.customer.impl;
 
+import com.airbnb.authy.model.AuthRequest;
+import com.airbnb.authy.service.auth.IAuthService;
 import com.airbnb.crud.airbnbDB.customer.dao.ICustomerDao;
 import com.airbnb.crud.airbnbDB.customer.entity.Customer;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
+import com.airbnb.crud.exceptions.AirbnbException;
 import com.airbnb.crud.exceptions.EntityNotFoundException;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -19,11 +22,13 @@ import static org.mockito.Mockito.*;
 class CustomerServiceImplUnitTest {
 
     private final ICustomerDao customerDao = Mockito.mock(ICustomerDao.class);
-    private final CustomerServiceImpl customerService = new CustomerServiceImpl(customerDao);;
+    private final IAuthService authService = Mockito.mock(IAuthService.class);
+    private final CustomerServiceImpl customerService = new CustomerServiceImpl(customerDao,authService);;
 
     @Test
     @DisplayName("Create customer for null input. This should throw NullPointerException")
     public void createCustomerWithNullInput() {
+        when(authService.isAuth(any(AuthRequest.class))).thenReturn(true);
         Assertions.assertThrows(NullPointerException.class, () -> {
             customerService.createCustomer(null);
         });
@@ -31,7 +36,8 @@ class CustomerServiceImplUnitTest {
 
     @Test
     @DisplayName("Success test case for create customer")
-    public void createCustomerWithHappyCase() {
+    public void createCustomerWithHappyCase() throws AirbnbException {
+        when(authService.isAuth(any(AuthRequest.class))).thenReturn(true);
         CreateCustomerRequest customerRequest = CustomerServiceTestData.getHappyCreateCustomerRequest();
         customerService.createCustomer(customerRequest);
         Customer expectedArgument = CustomerServiceTestData.getExpectedCustomer(customerRequest);

@@ -4,6 +4,7 @@ import com.airbnb.crud.airbnbDB.customer.entity.Customer;
 import com.airbnb.crud.controller.customer.model.CreateCustomerRequest;
 import com.airbnb.crud.controller.customer.model.CustomerDetails;
 import com.airbnb.crud.controller.model.BaseResponse;
+import com.airbnb.crud.exceptions.AirbnbException;
 import com.airbnb.crud.exceptions.EntityNotFoundException;
 import com.airbnb.crud.service.customer.ICustomerService;
 import io.micrometer.core.annotation.Timed;
@@ -37,7 +38,7 @@ public class CustomerController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "This api will be used to create the customer")
     @Timed(value="create_customer", histogram = true)
-    public BaseResponse createCustomer(@Valid @NotNull @RequestBody CreateCustomerRequest request){
+    public BaseResponse createCustomer(@Valid @NotNull @RequestBody CreateCustomerRequest request) throws AirbnbException {
         log.info("create customer request ={}",request);
         Customer customer = customerService.createCustomer(request);
         log.debug("created customer={}",customer);
