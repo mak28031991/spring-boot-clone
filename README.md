@@ -37,6 +37,10 @@ This project takes care of below items.
     spring.airbnb-slave-datasource.username=${AIRBNB_SLAVE_DB_USERNAME:root}
     spring.airbnb-slave-datasource.password=${AIRBNB_SLAVE_DB_PASSWORD:root}
     ```
+* Recursively download the dependent submodules. This will download the dependent library 'authy'. 
+    ```shell script
+    git submodule update --init --recursive
+    ```
 * Build the service. This will create a Jar file  `build/libs/airbnb-0.0.1-SNAPSHOT.jar`
     ```shell script
     ./gradlew clean build
