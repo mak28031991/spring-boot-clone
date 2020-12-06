@@ -1,182 +1,35 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7.1"
     }
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.4.0-SNAPSHOT'
-    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-    id 'java'
-    id "org.sonarqube" version "2.7.1"
+    id 'java-library'
+    id 'org.springframework.boot' version "${springBoot}"
+    id 'io.spring.dependency-management' version "${dependencyManagement}"
 }
 
-group = 'com.airbnb'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.sonarqube'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'jacoco'
-jacoco {
-    toolVersion = "0.8.4"
-    reportsDir = file("${buildDir}/reports/jacoco")
+allprojects {
+    group = 'com.airbnb'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '1.8'
 }
+subprojects {
 
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        csv.enabled false
-        html.destination file("${buildDir}/reports/jacoco/jacocoHtml")
-        xml.destination file("${buildDir}/reports/jacoco/jacocoXml")
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+    apply plugin: 'java'
+    repositories {
+        mavenCentral()
     }
-    afterEvaluate {
-        getClassDirectories().setFrom(
-                classDirectories.files.collect {
-                    fileTree(dir: it, exclude: [
-                            '**/repository/**',
-                            '**/entity/**',
-                            '**/exceptions/**',
-                            '**/swagger/**',
-                            '**/monitoring/**',
-                            'com/airbnb/crud/AirbnbApplication*',
-                    ])
-                }
-        )
+
+    test {
+        useJUnitPlatform()
     }
 }
 
-test {
-    useJUnitPlatform()
-    ignoreFailures = false
-    jacoco {
-        destinationFile = file("${buildDir}/reports/jacoco/jacoco.exec")
-    }
-    testLogging {
-        exceptionFormat "full" // default is "short"
-        events "passed", "skipped", "failed"
-    }
-
-}
-test.finalizedBy(project.tasks.jacocoTestReport)
-repositories {
-    jcenter()
-    mavenCentral()
-}
-
-sonarqube {
-    properties {
-        property "sonar.language", "java"
-    }
-}
-
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                counter = 'LINE'
-                minimum = 0.0
-            }
-        }
-        rule {
-            limit {
-                counter = 'BRANCH'
-                minimum = 0.0
-            }
-        }
-    }
-    afterEvaluate {
-        getClassDirectories().setFrom(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    '**/repository/**',
-                    '**/entity/**',
-                    '**/exceptions/**',
-                    '**/swagger/**',
-                    '**/monitoring/**',
-                    'com/airbnb/crud/AirbnbApplication*',
-            ])
-        })
-    }
-}
-
-check.dependsOn jacocoTestCoverageVerification
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven { url 'https://repo.spring.io/milestone' }
-    maven { url 'https://repo.spring.io/snapshot' }
-}
-
-ext {
-    set('testcontainersVersion', "1.15.0-rc2")
-}
-
-dependencies {
-
-    //database dependencies
-    runtimeOnly 'mysql:mysql-connector-java'
-    implementation ("org.springframework.boot:spring-boot-starter-data-jpa"){
-        exclude group:'com.zaxxer', module:'HikariCP'
-    }
-    implementation('org.springframework.boot:spring-boot-starter-jdbc') {
-        exclude group: 'com.zaxxer', module: 'HikariCP'
-    }
-    compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '7.0.19'
-    compile group: 'org.apache.tomcat', name: 'tomcat-juli', version: '7.0.19'
-
-    //swagger
-    compile("io.springfox:springfox-swagger2:2.9.2") {
-        exclude module: 'swagger-annotations'
-        exclude module: 'swagger-models'
-    }
-    compile("io.swagger:swagger-annotations:1.5.21")
-    compile("io.swagger:swagger-models:1.5.21")
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-
-    //web
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    //monitoring
-    runtimeOnly 'io.micrometer:micrometer-registry-new-relic'
-    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.micrometer:micrometer-core'
-
-    //validations
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.3.5.RELEASE'
-
-    //testing
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.15.0-rc2'
-    testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
-
-
-    //utilities
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
-
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
-    }
-}
-
-test {
-    useJUnitPlatform()
+bootJar {
+    enabled = false
 }
